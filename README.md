@@ -18,3 +18,6 @@ Second
 
 Third
 "To specify how the state tree is transformed by actions, you write pure reducers"
+
+*Middleware
+Is the suggested way to extend Redux with custom functionality

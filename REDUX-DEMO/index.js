@@ -2,10 +2,15 @@
 //import redux from 'redux'
 //As a simple node js application
 const redux = require('redux')
+const reduxLogger = require("redux-logger");
 
 //1 - Create the store
 const createStore = redux.createStore
 const combineReducers = redux.combineReducers
+//Middlewre - Provides a third-party extension point between dispatching an action, and the moment it reaches the reducer
+const applyMiddleware = redux.applyMiddleware
+const logger = reduxLogger.createLogger()
+
 
 const BUY_CAKE = 'BUY_CAKE'
 const BUY_ICECREAM = 'BUY_ICECREAM'
@@ -72,11 +77,12 @@ const rootReducer = combineReducers({
 
 //The create store receive a parameter which is the reducer that holds the application state
 //1 - A store to hold the state application
-const store = createStore(rootReducer)
+//Middleware = First import the library and second pass as argument to createStore
+const store = createStore(rootReducer, applyMiddleware(logger))
 //2
 console.log('Initial state', store.getState())
 //4 and 5 - A listener to the store - Anytime the state updates we log the state to the console
-const unsubscribe = store.subscribe(() => console.log('Update state', store.getState()))
+const unsubscribe = store.subscribe(() => {})
 //3
 store.dispatch(buyCake()) // When we dispatch the action the reducer sees that the action type is BUY_CAKE
 store.dispatch(buyCake())
